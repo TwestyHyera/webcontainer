@@ -1,0 +1,33 @@
+        }
+
+        function getWeeklyCount() {
+            let weeklyCount = 0;
+            const weekDays = 7;
+            for (let i = 0; i < weekDays; i++) {
+                const pastDate = new Date();
+                pastDate.setDate(pastDate.getDate() - i);
+                const dateStr = pastDate.toISOString().split('T')[0];
+                weeklyCount += parseInt(localStorage.getItem(dateStr)) || 0;
+            }
+            return weeklyCount;
+        }
+
+        countButton.addEventListener('click', () => {
+            count++;
+            counterElement.textContent = count;
+            localStorage.setItem('dailyCount', count);
+            localStorage.setItem(today, count);
+            updateDisplay();
+        });
+
+        resetDayButton.addEventListener('click', () => {
+            count = 0;
+            localStorage.setItem('dailyCount', count);
+            localStorage.setItem(today, count);
+            updateDisplay();
+        });
+
+        updateDisplay();
+    </script>
+</body>
+</html>
